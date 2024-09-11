@@ -3,6 +3,7 @@
 using System;
 using System.Collections.Generic;
 using ConsoleReadingApp;
+using CsvToSqlServer;
 using Microsoft.Office.Interop.Excel;
 
 class Program
@@ -53,10 +54,35 @@ class Program
         sqlExcelCreator.WriteData(dataFromDb);
         string sqlFilePathWrite = @"C:\Users\User\Documents\SqlExcel.xlsx";
         sqlExcelCreator.SaveAndClose(sqlFilePathWrite);
+
+
         Console.WriteLine("Excel file created and data written successfully!");
 
 
 
         Console.WriteLine("Excel data read and saved to database successfully!");
+
+        //creating a csv file
+
+
+        CsvWriter csvWriter = new CsvWriter();
+        string filePath = @"C:\Users\User\Documents\DatabaseCsv.csv";
+        csvWriter.WriteToCsv(dataFromDb, filePath);
+        Console.WriteLine("Csv file created successfully");
+
+
+        //Csv to database
+
+        string csvFilePath = @"C:\Users\User\Documents\DatabaseCsv.csv";
+        
+
+        CsvToList csvToSql = new CsvToList();
+        List<List<string>> dataFromCsv = csvToSql.ReadCsvToList(csvFilePath);
+
+        DatabaseSaver database = new DatabaseSaver(connectionString);
+        databaseSaver.SaveDataToDatabase(dataFromCsv);
+
+
+
     }
 }
