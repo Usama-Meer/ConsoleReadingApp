@@ -45,12 +45,12 @@ class Program
 
         SqlToExcel databaseReader = new SqlToExcel(connectionString);
 
-        List<List<string>> data = databaseReader.CollectingData();
+        List<List<string>> dataFromDb = databaseReader.CollectingData();
 
         //Creating Excel file using data from database
         
         ExcelCreator sqlExcelCreator = new ExcelCreator();
-        sqlExcelCreator.WriteData(fileData);
+        sqlExcelCreator.WriteData(dataFromDb);
         string sqlFilePathWrite = @"C:\Users\User\Documents\SqlExcel.xlsx";
         sqlExcelCreator.SaveAndClose(sqlFilePathWrite);
         Console.WriteLine("Excel file created and data written successfully!");

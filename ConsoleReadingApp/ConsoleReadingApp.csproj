@@ -190,6 +190,7 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CsvCreator.cs" />
     <Compile Include="ExcelCreater.cs" />
     <Compile Include="FileReader.cs" />
     <Compile Include="Program.cs" />
